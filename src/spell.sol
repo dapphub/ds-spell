@@ -17,7 +17,9 @@
 
 pragma solidity ^0.4.19;
 
-contract DSSpell {
+import 'ds-exec/exec.sol';
+
+contract DSSpell is DSExec {
     address public whom;
     uint256 public mana;
     bytes   public data;
@@ -29,7 +31,8 @@ contract DSSpell {
         data = data_;
     }
     function cast() {
-        require( !done && whom.call.value(mana)(data) );
+        require( !done );
+        exec(whom, data, mana);
         done = true;
     }
 }
