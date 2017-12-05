@@ -29,8 +29,7 @@ contract DSSpell {
         data = data_;
     }
     function cast() {
-        require(!done);
-        require( whom.call.value(mana)(data) );
+        require( !done && whom.call.value(mana)(data) );
         done = true;
     }
 }
