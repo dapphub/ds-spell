@@ -10,6 +10,7 @@ like an upgrade to a contract system that needs to be given root permission.
 
 ```
 var spell = spellbook.create(mySystem, calldata);
+// ... deliberate, System owners grant the spell permissions
 spell.cast();
 ```
 
