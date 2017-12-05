@@ -19,7 +19,7 @@ pragma solidity ^0.4.19;
 
 import 'ds-exec/exec.sol';
 
-contract DSSpell is DSExec {
+contract DSSpell is DSExec, DSNote {
     address public whom;
     uint256 public mana;
     bytes   public data;
@@ -30,7 +30,7 @@ contract DSSpell is DSExec {
         mana = mana_;
         data = data_;
     }
-    function cast() {
+    function cast() note {
         require( !done );
         exec(whom, data, mana);
         done = true;
