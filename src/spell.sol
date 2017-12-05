@@ -30,6 +30,7 @@ contract DSSpell is DSExec, DSNote {
         mana = mana_;
         data = data_;
     }
+    // Only marked 'done' if CALL succeeds (not exceptional condition).
     function cast() note {
         require( !done );
         exec(whom, data, mana);
