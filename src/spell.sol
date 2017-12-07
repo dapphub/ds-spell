@@ -18,6 +18,7 @@
 pragma solidity ^0.4.19;
 
 import 'ds-exec/exec.sol';
+import 'ds-note/note.sol';
 
 contract DSSpell is DSExec, DSNote {
     address public whom;
@@ -25,13 +26,13 @@ contract DSSpell is DSExec, DSNote {
     bytes   public data;
     bool    public done;
 
-    function DSSpell(address whom_, uint256 mana_, bytes data_) {
+    function DSSpell(address whom_, uint256 mana_, bytes data_) public {
         whom = whom_;
         mana = mana_;
         data = data_;
     }
     // Only marked 'done' if CALL succeeds (not exceptional condition).
-    function cast() note {
+    function cast() public note {
         require( !done );
         exec(whom, data, mana);
         done = true;
@@ -39,7 +40,7 @@ contract DSSpell is DSExec, DSNote {
 }
 
 contract DSSpellBook {
-    function make(address whom, uint256 mana, bytes data) returns (DSSpell) {
+    function make(address whom, uint256 mana, bytes data) public returns (DSSpell) {
         return new DSSpell(whom, mana, data);
     }
 }
