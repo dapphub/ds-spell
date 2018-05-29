@@ -1,6 +1,6 @@
 // spell.sol - An un-owned object that performs one action one time only
 
-// Copyright (C) 2017  DappHub, LLC
+// Copyright (C) 2017, 2018 DappHub, LLC
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.23;
 
 import 'ds-exec/exec.sol';
 import 'ds-note/note.sol';
@@ -26,7 +26,7 @@ contract DSSpell is DSExec, DSNote {
     bytes   public data;
     bool    public done;
 
-    function DSSpell(address whom_, uint256 mana_, bytes data_) public {
+    constructor(address whom_, uint256 mana_, bytes data_) public {
         whom = whom_;
         mana = mana_;
         data = data_;
