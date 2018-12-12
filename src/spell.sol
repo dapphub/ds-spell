@@ -15,10 +15,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-pragma solidity ^0.4.23;
+pragma solidity >=0.4.23;
 
-import 'ds-exec/exec.sol';
-import 'ds-note/note.sol';
+import "ds-exec/exec.sol";
+import "ds-note/note.sol";
 
 contract DSSpell is DSExec, DSNote {
     address public whom;
@@ -26,21 +26,21 @@ contract DSSpell is DSExec, DSNote {
     bytes   public data;
     bool    public done;
 
-    constructor(address whom_, uint256 mana_, bytes data_) public {
+    constructor(address whom_, uint256 mana_, bytes memory data_) public {
         whom = whom_;
         mana = mana_;
         data = data_;
     }
     // Only marked 'done' if CALL succeeds (not exceptional condition).
     function cast() public note {
-        require( !done );
+        require(!done, "ds-spell-already-cast");
         exec(whom, data, mana);
         done = true;
     }
 }
 
 contract DSSpellBook {
-    function make(address whom, uint256 mana, bytes data) public returns (DSSpell) {
+    function make(address whom, uint256 mana, bytes memory data) public returns (DSSpell) {
         return new DSSpell(whom, mana, data);
     }
 }
